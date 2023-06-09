@@ -1,0 +1,12 @@
+package com.abner.minhasfinancas.service;
+
+import com.abner.minhasfinancas.model.entity.Usuario;
+
+public interface UsuarioService {
+
+	Usuario autenticar(String email, String senha);
+
+	Usuario cadastrar(Usuario usuario);
+
+	void validareEmail(String email);
+}

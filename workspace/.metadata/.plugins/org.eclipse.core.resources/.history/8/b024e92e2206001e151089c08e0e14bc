@@ -1,0 +1,5 @@
+package com.abner.minhasfinancas.model.repository;
+
+public interface LancamentoRepository {
+
+}

@@ -1,0 +1,15 @@
+package com.abner.minhasfinancas.api.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.abner.minhasfinancas.service.LancamentoService;
+
+@RestController
+@RequestMapping("/api/lancamentos")
+public class LancamentoController {
+
+	@Autowired
+	private LancamentoService service;
+}

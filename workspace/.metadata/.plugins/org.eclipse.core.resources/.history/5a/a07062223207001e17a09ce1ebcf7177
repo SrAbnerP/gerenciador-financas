@@ -1,0 +1,5 @@
+package com.abner.minhasfinancas.api.dto;
+
+public class AtualizaStatusDTO {
+
+}

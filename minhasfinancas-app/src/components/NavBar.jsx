@@ -21,7 +21,7 @@ export default function NavBar(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav">
-            <Link href="#/" label="Home" />
+            <Link href="#/home" label="Home" />
             <Link href="#/cadastro-usuarios" label="Usuáios" />
             <Link href="#/" label="Lançamentos" />
             <Link href="#/login" label="Login" />

@@ -3,11 +3,13 @@ import Login from "./views/login";
 
 import "bootswatch/dist/flatly/bootstrap.css";
 import "./styles/custom.css";
+import CadastroUsuario from "./views/cadastro-usuario";
 
 function App() {
   return (
     <div>
-      <Login></Login>
+      {/* <Login></Login> */}
+      <CadastroUsuario></CadastroUsuario>
     </div>
   );
 }

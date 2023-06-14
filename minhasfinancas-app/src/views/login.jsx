@@ -1,18 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 import Card from "../components/Card";
 import Form from "../components/Form";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-
-  const entrar = () => {
-    console.log("Email: " + email + "\n Senha: " + senha);
-  };
+  const [mensagemErro, setMensagemErro] = useState(null);
 
   const navigate = useNavigate();
+
+  const entrar = () => {
+    axios
+      .post("http://localhost:8080/api/usuarios/autenticar", {
+        email: email,
+        senha: senha,
+      })
+      .then((response) => {
+        navigate("/home");
+      })
+      .catch((erro) => {
+        setMensagemErro(erro.response.data);
+      });
+  };
 
   const redirectCadastar = () => {
     navigate("/cadastro-usuarios");
@@ -27,6 +40,9 @@ export default function Login() {
       <div className="col-md-6" style={{ position: "relative", left: "300px" }}>
         <div className="bs-docs-section">
           <Card title="Login">
+            <div className="row">
+              <span>{mensagemErro}</span>
+            </div>
             <div className="row">
               <div className="col-lg-12">
                 <div className="bs-component">

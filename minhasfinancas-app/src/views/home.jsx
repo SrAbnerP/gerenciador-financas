@@ -1,7 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import UsuarioService from "../app/service/usuarioService";
+import LocalStorageService from "../app/service/localStorageService";
 
 export default function Home(props) {
   const [saldo, setSaldo] = useState(0);
+
+  const [usuarioService] = useState(() => new UsuarioService());
+
+  useEffect(() => {
+    const usuarioLogado = LocalStorageService.obterItem("_usuario_logado");
+
+    usuarioService
+      .obterSaldoPorUsuario(usuarioLogado.id)
+      .then((response) => {
+        setSaldo(response.data);
+      })
+      .catch((error) => {
+        console.error(error.response);
+      });
+  }, []);
 
   return (
     <div className="jumbotron">

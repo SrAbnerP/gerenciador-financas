@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import UsuarioService from "../app/service/usuarioService";
+import LocalStorageService from "../app/service/localStorageService";
 
 import Card from "../components/Card";
 import Form from "../components/Form";
@@ -11,15 +12,18 @@ export default function Login() {
   const [senha, setSenha] = useState("");
   const [mensagemErro, setMensagemErro] = useState(null);
 
+  const [usuarioService] = useState(() => new UsuarioService());
+
   const navigate = useNavigate();
 
   const entrar = () => {
-    axios
-      .post("http://localhost:8080/api/usuarios/autenticar", {
+    usuarioService
+      .autenticar({
         email: email,
         senha: senha,
       })
       .then((response) => {
+        LocalStorageService.adicionarItem("_usuario_logado", response.data);
         navigate("/home");
       })
       .catch((erro) => {
@@ -30,10 +34,6 @@ export default function Login() {
   const redirectCadastar = () => {
     navigate("/cadastro-usuarios");
   };
-
-  // redirectCadastar = () => {
-  //   this.props.history.push('/cadastro-usuarios')
-  // }
 
   return (
     <div className="row">

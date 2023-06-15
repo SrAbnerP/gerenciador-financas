@@ -4,17 +4,38 @@ import Card from "../components/Card";
 import Form from "../components/Form";
 import { useNavigate } from "react-router-dom";
 
+import UsuarioService from "../app/service/usuarioService";
+import { mensagemErro, mensagemSucesso } from "../components/Toastr";
+
 export default function CadastroUsuario(props) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
 
-  const cadastrar = () => {
-    console.log(nome + ", " + email + ", " + senha + ", " + confirmarSenha);
-  };
-
   const navigate = useNavigate();
+
+  const [usuarioService] = useState(() => new UsuarioService());
+
+  const cadastrar = () => {
+    const usuario = {
+      name: nome,
+      email: email,
+      senha: senha,
+    };
+
+    usuarioService
+      .salvar(usuario)
+      .then((response) => {
+        mensagemSucesso(
+          "Usuário cadastrado com sucesso! Faça o login para acessar o sistema.",
+          navigate("/login")
+        );
+      })
+      .catch((erro) => {
+        mensagemErro(erro.response);
+      });
+  };
 
   const redirectLogin = () => {
     navigate("/login");

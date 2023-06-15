@@ -42,12 +42,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Transactional
 	public Usuario salvarUsuario(Usuario usuario) {
 
-		validareEmail(usuario.getEmail());
+		validarEmail(usuario.getEmail());
 		return repository.save(usuario);
 	}
 
 	@Override
-	public void validareEmail(String email) {
+	public void validarEmail(String email) {
 
 		boolean existe = repository.existsByEmail(email);
 		if (existe) {

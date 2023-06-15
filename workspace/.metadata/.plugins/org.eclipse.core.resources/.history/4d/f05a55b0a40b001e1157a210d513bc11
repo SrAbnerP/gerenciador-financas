@@ -30,12 +30,12 @@ public class UsuarioServiceTest {
 		service.validarEmail("email@email.com");
 	}
 
-	public void deveLancarErroAoValidarEmailQuandoExistirEmailCadastrado() {
+	public void deveLancarErroAoValidarEmailQuandoExistirEmailCadastrado () {
 		// cenario
 		Usuario usuario = new Usuario("usuario", "email@email.com");
 		repository.save(usuario);
-
-		// ação
+		
+		//ação
 		service.validarEmail("email@email.com");
 	}
 

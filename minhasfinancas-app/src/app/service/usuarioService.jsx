@@ -2,7 +2,7 @@ import ApiService from "../apiservice";
 
 class UsuarioService extends ApiService {
   constructor() {
-    super("api/usuarios");
+    super("/api/usuarios");
   }
 
   autenticar(credenciais) {
@@ -14,7 +14,7 @@ class UsuarioService extends ApiService {
   }
 
   salvar(usuario) {
-    return this.post("/", usuario);
+    return this.post("", usuario);
   }
 }
 

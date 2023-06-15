@@ -17,7 +17,38 @@ export default function CadastroUsuario(props) {
 
   const [usuarioService] = useState(() => new UsuarioService());
 
+  function validar() {
+    const msgs = [];
+
+    if (!nome) {
+      msgs.push("O campo Nome é obrigatório.");
+    }
+
+    if (!email) {
+      msgs.push("O campo Email é obrigatório.");
+    } else if (!email.match(/^[a-z0=9.]+@[a-z0-9]+\.[a-z]/)) {
+      msgs.push("Informe um Email válido.");
+    }
+
+    if (!senha || !confirmarSenha) {
+      msgs.push("Digite as senha e a confirme");
+    } else if (senha !== confirmarSenha) {
+      msgs.push("As senhas não batem.");
+    }
+
+    return msgs;
+  }
+
   const cadastrar = () => {
+    const msgs = validar();
+
+    if (msgs && msgs.length > 0) {
+      msgs.forEach((msg, index) => {
+        mensagemErro(msg);
+      });
+      return false;
+    }
+
     const usuario = {
       name: nome,
       email: email,
@@ -33,7 +64,7 @@ export default function CadastroUsuario(props) {
         );
       })
       .catch((erro) => {
-        mensagemErro(erro.response);
+        mensagemErro(erro.response.data);
       });
   };
 

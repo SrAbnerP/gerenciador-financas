@@ -6,11 +6,12 @@ import LocalStorageService from "../app/service/localStorageService";
 
 import Card from "../components/Card";
 import Form from "../components/Form";
+import { mensagemErro } from "../components/Toastr";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [mensagemErro, setMensagemErro] = useState(null);
+  //const [mensagemErro, setMensagemErro] = useState(null);
 
   const [usuarioService] = useState(() => new UsuarioService());
 
@@ -27,7 +28,7 @@ export default function Login() {
         navigate("/home");
       })
       .catch((erro) => {
-        setMensagemErro(erro.response.data);
+        mensagemErro(erro.response.data);
       });
   };
 
@@ -40,9 +41,6 @@ export default function Login() {
       <div className="col-md-6" style={{ position: "relative", left: "300px" }}>
         <div className="bs-docs-section">
           <Card title="Login">
-            <div className="row">
-              <span>{mensagemErro}</span>
-            </div>
             <div className="row">
               <div className="col-lg-12">
                 <div className="bs-component">

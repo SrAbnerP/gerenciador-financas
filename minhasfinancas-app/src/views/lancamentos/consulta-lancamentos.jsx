@@ -6,7 +6,7 @@ import LancamentosTable from "./lancamentosTable";
 
 import LancamentosService from "../../app/service/lancamentoService";
 import LocalStorageService from "../../app/service/localStorageService";
-import { mensagemErro } from "../../components/Toastr";
+import { mensagemErro, mensagemSucesso } from "../../components/Toastr";
 
 export default function ConsultaLancamento() {
   const [ano, setAno] = useState("");
@@ -40,6 +40,20 @@ export default function ConsultaLancamento() {
       })
       .catch((erro) => {
         console.log(erro);
+      });
+  };
+
+  const deletar = (lancamento) => {
+    lancamentoService
+      .deletar(lancamento.id)
+      .then((response) => {
+        setLancamentos((prevLancamentos) =>
+          prevLancamentos.filter((l) => l.id !== lancamento.id)
+        );
+        mensagemSucesso("Lançamento deletado com sucesso!");
+      })
+      .catch((erro) => {
+        mensagemErro("Ocorreu um erro ao tentar deletar um lançamento.");
       });
   };
 
@@ -109,7 +123,10 @@ export default function ConsultaLancamento() {
       <div className="row">
         <div className="col-md-12">
           <div className="bs-component">
-            <LancamentosTable lancamentos={lancamentos}></LancamentosTable>
+            <LancamentosTable
+              lancamentos={lancamentos}
+              deletarAction={deletar}
+            ></LancamentosTable>
           </div>
         </div>
       </div>

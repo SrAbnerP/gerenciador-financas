@@ -1,5 +1,0 @@
-package com.abner.minhasfinancas.service;
-
-public interface UsuarioService {
-
-}

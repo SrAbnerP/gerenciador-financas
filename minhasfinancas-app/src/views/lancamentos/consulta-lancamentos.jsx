@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../components/Card";
 import Form from "../../components/Form";
 import SelectMenu from "../../components/SelectMenu";
 import LancamentosTable from "./lancamentosTable";
 
+import LancamentosService from "../../app/service/lancamentoService";
+import LocalStorageService from "../../app/service/localStorageService";
+
 export default function ConsultaLancamento() {
+  const [ano, setAno] = useState("");
+  const [mes, setMes] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [lancamentos, setLancamentos] = useState([]);
+
+  const [lancamentoService] = useState(() => new LancamentosService());
+
+  const buscar = () => {
+    const usuarioLogado = LocalStorageService.obterItem("_usuario_logado");
+
+    const lancamentoFilro = {
+      ano: ano,
+      mes: mes,
+      tipo: tipo,
+      usuario: usuarioLogado.id,
+    };
+
+    lancamentoService
+      .consultar(lancamentoFilro)
+      .then((response) => {
+        setLancamentos(response.data);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
+  };
+
   const meses = [
     { label: "Selecione...", value: "" },
     { label: "Janeiro", value: 1 },
@@ -27,17 +57,6 @@ export default function ConsultaLancamento() {
     { label: "Receita", value: "RECEITA" },
   ];
 
-  const lancamentos = [
-    {
-      id: 1,
-      descricao: "Salario",
-      valor: 5000,
-      mes: 1,
-      tipo: "Receita",
-      status: "Efetivado",
-    },
-  ];
-
   return (
     <Card title="Consulta Lançamentos">
       <div className="row">
@@ -48,24 +67,33 @@ export default function ConsultaLancamento() {
                 type="text"
                 className="form-control"
                 id="inputAno"
+                value={ano}
+                onChange={(e) => setAno(e.target.value)}
                 placeholder="Digite o ano"
               />
             </Form>
+
             <Form htmlFor="inputMes" label="Mês: ">
               <SelectMenu
                 id="inputMes"
+                value={mes}
+                onChange={(e) => setMes(e.target.value)}
                 className="form-control"
                 lista={meses}
               ></SelectMenu>
             </Form>
+
             <Form htmlFor="inputTipo" label="Tipo de Lançamento: ">
               <SelectMenu
                 id="inputTipo"
+                value={tipo}
+                onChange={(e) => setTipo(e.target.value)}
                 className="form-control"
                 lista={tipos}
               ></SelectMenu>
             </Form>
-            <button type="button" className="btn btn-success">
+
+            <button onClick={buscar} type="button" className="btn btn-success">
               Buscar
             </button>
             <button type="button" className="btn btn-danger">

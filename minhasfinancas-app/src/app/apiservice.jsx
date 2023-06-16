@@ -26,7 +26,7 @@ class ApiService {
 
   get(url) {
     const requestUrl = `${this.apiurl}${url}`;
-    return httpClient.put(requestUrl);
+    return httpClient.get(requestUrl);
   }
 }
 

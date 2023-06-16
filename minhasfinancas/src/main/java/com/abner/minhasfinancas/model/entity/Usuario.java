@@ -1,5 +1,6 @@
 package com.abner.minhasfinancas.model.entity;
 
+import java.util.Collection;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -7,10 +8,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 
 @Entity
-@Table(name = "usuario", schema = "financas")
 public class Usuario {
 
 	@Id
@@ -26,6 +26,9 @@ public class Usuario {
 
 	@Column(name = "senha")
 	private String senha;
+
+	@OneToMany(mappedBy = "usuario")
+	private Collection<Lancamento> lancamentos;
 
 	public Usuario(Long id, String nome, String email, String senha) {
 		super();

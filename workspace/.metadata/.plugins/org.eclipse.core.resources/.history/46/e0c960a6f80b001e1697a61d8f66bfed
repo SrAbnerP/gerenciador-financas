@@ -1,0 +1,52 @@
+package com.abner.minhasfinancas;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.request.WebRequestInterceptor;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@SpringBootApplication
+@EnableWebMvc
+public class MinhasfinancasApplication implements WebMvcConfigurer {
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		// WebMvcConfigurer.super.addCorsMappings(registry);
+
+		registry.addMapping("/**").allowedMethods("GET", "POST", "DELETE", "OPTIONS");
+	}
+	
+	@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new CorsInterceptor(null));
+    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(MinhasfinancasApplication.class, args);
+	}
+
+	@Configuration
+    public static class CorsInterceptor extends WebRequestHandlerInterceptorAdapter {
+        public CorsInterceptor(WebRequestInterceptor requestInterceptor) {
+			super(requestInterceptor);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+                throws Exception {
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+            response.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE,OPTIONS");
+            response.setHeader("Access-Control-Allow-Headers", "*");
+            return true;
+        }
+    }
+}

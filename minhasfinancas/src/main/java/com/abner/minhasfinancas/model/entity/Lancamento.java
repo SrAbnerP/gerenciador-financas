@@ -19,10 +19,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "lancamento", schema = "financas")
 public class Lancamento {
 
 	@Id
@@ -39,12 +37,12 @@ public class Lancamento {
 	@Column(name = "ano")
 	private Integer ano;
 
+	@Column(name = "valor")
+	private BigDecimal valor;
+
 	@ManyToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-
-	@Column(name = "valor")
-	private BigDecimal valor;
 
 	@Column(name = "data_cadastro")
 	@Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)

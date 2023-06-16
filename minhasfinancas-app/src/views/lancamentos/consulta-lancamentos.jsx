@@ -11,6 +11,7 @@ export default function ConsultaLancamento() {
   const [ano, setAno] = useState("");
   const [mes, setMes] = useState("");
   const [tipo, setTipo] = useState("");
+  const [descricao, setDescricao] = useState("");
   const [lancamentos, setLancamentos] = useState([]);
 
   const [lancamentoService] = useState(() => new LancamentosService());
@@ -22,6 +23,7 @@ export default function ConsultaLancamento() {
       ano: ano,
       mes: mes,
       tipo: tipo,
+      descricao: descricao,
       usuario: usuarioLogado.id,
     };
 
@@ -35,27 +37,9 @@ export default function ConsultaLancamento() {
       });
   };
 
-  const meses = [
-    { label: "Selecione...", value: "" },
-    { label: "Janeiro", value: 1 },
-    { label: "Fevereiro", value: 2 },
-    { label: "Março", value: 3 },
-    { label: "Abril", value: 4 },
-    { label: "Maio", value: 5 },
-    { label: "Junho", value: 6 },
-    { label: "Julho", value: 7 },
-    { label: "Agosto", value: 8 },
-    { label: "Setembro", value: 9 },
-    { label: "Outubro", value: 10 },
-    { label: "Novembro", value: 11 },
-    { label: "Dezembro", value: 12 },
-  ];
+  const meses = lancamentoService.obterListaMeses();
 
-  const tipos = [
-    { label: "Selecione...", value: "" },
-    { label: "Despesa", value: "DESPESA" },
-    { label: "Receita", value: "RECEITA" },
-  ];
+  const tipos = lancamentoService.obterListaTipos();
 
   return (
     <Card title="Consulta Lançamentos">
@@ -81,6 +65,17 @@ export default function ConsultaLancamento() {
                 className="form-control"
                 lista={meses}
               ></SelectMenu>
+            </Form>
+
+            <Form htmlFor="inputDescricao" label="Descrição: ">
+              <input
+                type="text"
+                className="form-control"
+                id="inputDescricao"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+                placeholder="Digite a descrição"
+              />
             </Form>
 
             <Form htmlFor="inputTipo" label="Tipo de Lançamento: ">

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.test.context.junit4.SpringJUnit4ClassRunner"/>
     <fullyQualifiedTypeName name="org.springframework.test.context.junit4.SpringRunner"/>
     <fullyQualifiedTypeName name="org.assertj.core.api.Assertions"/>
     <fullyQualifiedTypeName name="org.springframework.test.context.junit.jupiter.SpringExtension"/>
@@ -36,7 +34,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.api.dto.AtualizaStatusDTO"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.model.enums.StatusLancamento"/>
-    <fullyQualifiedTypeName name="com.abner.minhasfinancas.model.entity.Lancamento"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.exception.RegraNegocioException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="org.springframework.web.servlet.handler.WebRequestHandlerInterceptorAdapter"/>
     <fullyQualifiedTypeName name="java.net.http.HttpHeaders"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpHeaders"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
+    <fullyQualifiedTypeName name="java.util.Collection"/>
+    <fullyQualifiedTypeName name="com.abner.minhasfinancas.model.entity.Lancamento"/>
 </qualifiedTypeNameHistroy>

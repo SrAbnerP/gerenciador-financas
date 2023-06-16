@@ -6,6 +6,7 @@ import LancamentosTable from "./lancamentosTable";
 
 import LancamentosService from "../../app/service/lancamentoService";
 import LocalStorageService from "../../app/service/localStorageService";
+import { mensagemErro } from "../../components/Toastr";
 
 export default function ConsultaLancamento() {
   const [ano, setAno] = useState("");
@@ -17,6 +18,11 @@ export default function ConsultaLancamento() {
   const [lancamentoService] = useState(() => new LancamentosService());
 
   const buscar = () => {
+    if (!ano) {
+      mensagemErro("O preenchimento do campo ano é obrigatório.");
+      return false;
+    }
+
     const usuarioLogado = LocalStorageService.obterItem("_usuario_logado");
 
     const lancamentoFilro = {

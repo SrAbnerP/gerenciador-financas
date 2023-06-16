@@ -1,11 +1,17 @@
 import React from "react";
+import { Currency } from "currency-formatter";
 
 export default function LancamentosTable(props) {
+  const formatoMoeda = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   const rows = props.lancamentos.map((lancamento) => {
     return (
       <tr key={lancamento.id}>
         <td>{lancamento.descricao}</td>
-        <td>{lancamento.valor}</td>
+        <td>{formatoMoeda.format(lancamento.valor)}</td>
         <td>{lancamento.tipo}</td>
         <td>{lancamento.mes}</td>
         <td>{lancamento.status}</td>

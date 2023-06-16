@@ -50,7 +50,7 @@ export default function CadastroUsuario(props) {
     }
 
     const usuario = {
-      name: nome,
+      nome: nome,
       email: email,
       senha: senha,
     };

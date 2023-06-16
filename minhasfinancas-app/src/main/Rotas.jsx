@@ -5,6 +5,7 @@ import Login from "../views/login";
 import CadastroUsuario from "../views/cadastro-usuario";
 import Home from "../views/home";
 import ConsultaLancamento from "../views/lancamentos/consulta-lancamentos";
+import CadastroLancamentos from "../views/lancamentos/cadastro-lancamentos";
 
 export default function Rotas(props) {
   return (
@@ -17,6 +18,10 @@ export default function Rotas(props) {
           <Route
             path="/consulta-lancamentos"
             element={<ConsultaLancamento />}
+          />
+          <Route
+            path="/cadastro-lancamentos"
+            element={<CadastroLancamentos />}
           />
         </Routes>
       </HashRouter>

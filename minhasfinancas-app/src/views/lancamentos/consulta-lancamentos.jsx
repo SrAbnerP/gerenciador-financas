@@ -8,12 +8,18 @@ import LancamentosService from "../../app/service/lancamentoService";
 import LocalStorageService from "../../app/service/localStorageService";
 import { mensagemErro, mensagemSucesso } from "../../components/Toastr";
 
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+
 export default function ConsultaLancamento() {
   const [ano, setAno] = useState("");
   const [mes, setMes] = useState("");
   const [tipo, setTipo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [lancamentos, setLancamentos] = useState([]);
+
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [lancamentoDeletar, setLancamentoDeletar] = useState({});
 
   const [lancamentoService] = useState(() => new LancamentosService());
 
@@ -43,12 +49,18 @@ export default function ConsultaLancamento() {
       });
   };
 
-  const deletar = (lancamento) => {
+  const abrirConfirmacao = (lancamento) => {
+    setShowConfirmDialog(true);
+    setLancamentoDeletar(lancamento);
+  };
+
+  const deletar = () => {
     lancamentoService
-      .deletar(lancamento.id)
+      .deletar(lancamentoDeletar.id)
       .then((response) => {
+        setShowConfirmDialog(false);
         setLancamentos((prevLancamentos) =>
-          prevLancamentos.filter((l) => l.id !== lancamento.id)
+          prevLancamentos.filter((l) => l.id !== lancamentoDeletar.id)
         );
         mensagemSucesso("Lançamento deletado com sucesso!");
       })
@@ -60,6 +72,28 @@ export default function ConsultaLancamento() {
   const meses = lancamentoService.obterListaMeses();
 
   const tipos = lancamentoService.obterListaTipos();
+
+  const cancelarDelecao = () => {
+    setShowConfirmDialog(false);
+    setLancamentoDeletar({});
+  };
+
+  const confirmDialogFooter = (
+    <div>
+      <Button
+        label="Cancelar"
+        icon="pi pi-times"
+        onClick={cancelarDelecao}
+        className="p-button-text"
+      />
+      <Button
+        label="Confirmar"
+        icon="pi pi-check"
+        onClick={deletar}
+        autoFocus
+      />
+    </div>
+  );
 
   return (
     <Card title="Consulta Lançamentos">
@@ -125,10 +159,22 @@ export default function ConsultaLancamento() {
           <div className="bs-component">
             <LancamentosTable
               lancamentos={lancamentos}
-              deletarAction={deletar}
+              deletarAction={abrirConfirmacao}
             ></LancamentosTable>
           </div>
         </div>
+      </div>
+      <div>
+        <Dialog
+          header="Confirmação"
+          visible={showConfirmDialog}
+          style={{ width: "50vw" }}
+          modal={true}
+          onHide={() => setShowConfirmDialog(false)}
+          footer={confirmDialogFooter}
+        >
+          <p className="m-0">Confirma a exclusão deste lançamento?</p>
+        </Dialog>
       </div>
     </Card>
   );

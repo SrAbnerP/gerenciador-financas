@@ -10,6 +10,7 @@ import { mensagemErro, mensagemSucesso } from "../../components/Toastr";
 
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
+import { useNavigate } from "react-router-dom";
 
 export default function ConsultaLancamento() {
   const [ano, setAno] = useState("");
@@ -22,6 +23,8 @@ export default function ConsultaLancamento() {
   const [lancamentoDeletar, setLancamentoDeletar] = useState({});
 
   const [lancamentoService] = useState(() => new LancamentosService());
+
+  const navigate = useNavigate();
 
   const buscar = () => {
     if (!ano) {
@@ -95,6 +98,10 @@ export default function ConsultaLancamento() {
     </div>
   );
 
+  const preparaFormularioCadastro = () => {
+    navigate("/cadastro-lancamentos");
+  };
+
   return (
     <Card title="Consulta Lançamentos">
       <div className="row">
@@ -145,7 +152,11 @@ export default function ConsultaLancamento() {
             <button onClick={buscar} type="button" className="btn btn-success">
               Buscar
             </button>
-            <button type="button" className="btn btn-danger">
+            <button
+              onClick={preparaFormularioCadastro}
+              type="button"
+              className="btn btn-danger"
+            >
               Cadastrar
             </button>
           </div>

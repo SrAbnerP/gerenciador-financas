@@ -41,7 +41,7 @@ export default function Home(props) {
         </a>
         <a
           className="btn btn-danger btn-lg"
-          href="https://bootswatch.com/flatly/#"
+          href="#/cadastro-lancamentos"
           role="button"
         >
           <i className="fa fa-users"></i> Cadastrar Lançamento

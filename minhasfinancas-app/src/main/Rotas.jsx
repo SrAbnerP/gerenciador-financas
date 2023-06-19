@@ -1,8 +1,8 @@
 import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 
-import Login from "../views/login";
-import CadastroUsuario from "../views/cadastro-usuario";
+import Login from "../views/usuarios/login";
+import CadastroUsuario from "../views/usuarios/cadastro-usuario";
 import Home from "../views/home";
 import ConsultaLancamento from "../views/lancamentos/consulta-lancamentos";
 import CadastroLancamentos from "../views/lancamentos/cadastro-lancamentos";

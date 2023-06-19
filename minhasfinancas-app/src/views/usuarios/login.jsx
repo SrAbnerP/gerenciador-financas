@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import UsuarioService from "../app/service/usuarioService";
-import LocalStorageService from "../app/service/localStorageService";
+import UsuarioService from "../../app/service/usuarioService";
+import LocalStorageService from "../../app/service/localStorageService";
 
-import Card from "../components/Card";
-import Form from "../components/Form";
-import { mensagemErro } from "../components/Toastr";
+import Card from "../../components/Card";
+import Form from "../../components/Form";
+import { mensagemErro } from "../../components/Toastr";
 
 export default function Login() {
   const [email, setEmail] = useState("");

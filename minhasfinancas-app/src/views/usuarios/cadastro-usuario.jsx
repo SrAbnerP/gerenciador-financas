@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-import Card from "../components/Card";
-import Form from "../components/Form";
+import Card from "../../components/Card";
+import Form from "../../components/Form";
 import { useNavigate } from "react-router-dom";
 
-import UsuarioService from "../app/service/usuarioService";
-import { mensagemErro, mensagemSucesso } from "../components/Toastr";
+import UsuarioService from "../../app/service/usuarioService";
+import { mensagemErro, mensagemSucesso } from "../../components/Toastr";
 
 export default function CadastroUsuario(props) {
   const [nome, setNome] = useState("");

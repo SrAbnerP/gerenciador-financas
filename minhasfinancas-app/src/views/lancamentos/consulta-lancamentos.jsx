@@ -6,7 +6,11 @@ import LancamentosTable from "./lancamentosTable";
 
 import LancamentosService from "../../app/service/lancamentoService";
 import LocalStorageService from "../../app/service/localStorageService";
-import { mensagemErro, mensagemSucesso } from "../../components/Toastr";
+import {
+  mensagemAlerta,
+  mensagemErro,
+  mensagemSucesso,
+} from "../../components/Toastr";
 
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
@@ -49,6 +53,10 @@ export default function ConsultaLancamento() {
     lancamentoService
       .consultar(lancamentoFilro)
       .then((response) => {
+        const lista = response.data;
+        if (lista.length < 1) {
+          mensagemAlerta("Nenhum resultado encontrado.");
+        }
         setLancamentos(response.data);
       })
       .catch((erro) => {
@@ -167,6 +175,7 @@ export default function ConsultaLancamento() {
             </Form>
 
             <button onClick={buscar} type="button" className="btn btn-success">
+              <i className="pi pi-search" style={{ fontSize: "1rem" }}></i>{" "}
               Buscar
             </button>
             <button
@@ -174,6 +183,7 @@ export default function ConsultaLancamento() {
               type="button"
               className="btn btn-danger"
             >
+              <i className="pi pi-plus" style={{ fontSize: "1rem" }}></i>{" "}
               Cadastrar
             </button>
           </div>

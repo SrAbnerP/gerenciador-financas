@@ -66,12 +66,20 @@ export default function Login() {
                       />
                     </Form>
                     <button className="btn btn-success" onClick={entrar}>
+                      <i
+                        className="pi pi-sign-in"
+                        style={{ fontSize: "1rem" }}
+                      ></i>{" "}
                       Entrar
                     </button>
                     <button
                       onClick={redirectCadastar}
                       className="btn btn-danger"
                     >
+                      <i
+                        className="pi pi-plus"
+                        style={{ fontSize: "1rem" }}
+                      ></i>{" "}
                       Cadastrar
                     </button>
                   </fieldset>

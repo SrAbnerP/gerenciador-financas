@@ -189,10 +189,12 @@ export default function CadastroLancamentos() {
           <div className="col-md-6">
             {atualizando ? (
               <button className="btn btn-success" onClick={atualizar}>
+                <i className="pi pi-refresh" style={{ fontSize: "1rem" }}></i>{" "}
                 Atualizar
               </button>
             ) : (
               <button className="btn btn-success" onClick={submit}>
+                <i className="pi pi-save" style={{ fontSize: "1rem" }}></i>{" "}
                 Salvar
               </button>
             )}
@@ -201,6 +203,7 @@ export default function CadastroLancamentos() {
               className="btn btn-danger"
               onClick={(e) => navigate("/consulta-lancamentos")}
             >
+              <i className="pi pi-times" style={{ fontSize: "1rem" }}></i>{" "}
               Cancelar
             </button>
           </div>

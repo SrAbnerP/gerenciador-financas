@@ -1,5 +1,4 @@
 import React from "react";
-import { Currency } from "currency-formatter";
 
 export default function LancamentosTable(props) {
   const formatoMoeda = new Intl.NumberFormat("pt-BR", {
@@ -17,36 +16,42 @@ export default function LancamentosTable(props) {
         <td>{lancamento.status}</td>
         <td>
           <button
+            disabled={lancamento.status !== "PENDENTE"}
+            title="Efetivar"
             type="button"
             className="btn btn-success"
             onClick={(e) => props.alterarStatus(lancamento, "EFETIVADO")}
           >
-            Efetivar
+            <i className="pi pi-check" style={{ fontSize: "1rem" }}></i>
           </button>
           <button
+            disabled={lancamento.status !== "PENDENTE"}
+            title="Cancelar"
             type="button"
             className="btn btn-warning"
             onClick={(e) => props.alterarStatus(lancamento, "CANCELADO")}
           >
-            Cancelar
+            <i className="pi pi-times" style={{ fontSize: "1rem" }}></i>
           </button>
           <button
+            title="Editar"
             type="button"
             className="btn btn-primary"
             onClick={(e) => {
               props.editarAction(lancamento.id);
             }}
           >
-            Editar
+            <i className="pi pi-pencil" style={{ fontSize: "1rem" }}></i>
           </button>
           <button
+            title="Excluir"
             type="button"
             className="btn btn-danger"
             onClick={(e) => {
               props.deletarAction(lancamento);
             }}
           >
-            Deletar
+            <i className="pi pi-trash" style={{ fontSize: "1rem" }}></i>
           </button>
         </td>
       </tr>

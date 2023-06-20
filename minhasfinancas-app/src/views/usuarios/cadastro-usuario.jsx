@@ -97,13 +97,14 @@ export default function CadastroUsuario(props) {
               className="btn btn-success"
               onClick={cadastrar}
             >
-              Salvar
+              <i className="pi pi-save" style={{ fontSize: "1rem" }}></i> Salvar
             </button>
             <button
               onClick={redirectLogin}
               type="button"
               className="btn btn-danger"
             >
+              <i className="pi pi-times" style={{ fontSize: "1rem" }}></i>{" "}
               Cancelar
             </button>
           </div>

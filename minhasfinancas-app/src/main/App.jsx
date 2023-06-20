@@ -6,6 +6,7 @@ import "toastr/build/toastr.min.js";
 
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 import "bootswatch/dist/flatly/bootstrap.css";
 import "../styles/custom.css";

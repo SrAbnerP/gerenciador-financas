@@ -85,6 +85,19 @@ export default function ConsultaLancamento() {
     setLancamentoDeletar({});
   };
 
+  const alterarStatus = (lancamento, status) => {
+    lancamentoService.alterarStatus(lancamento.id, status).then((response) => {
+      const novosLancamentos = [...lancamentos];
+      const index = novosLancamentos.indexOf(lancamento);
+      if (index !== -1) {
+        lancamento.status = status;
+        novosLancamentos[index] = lancamento;
+        setLancamentos(novosLancamentos);
+      }
+      mensagemSucesso("Status atualizado com sucesso!");
+    });
+  };
+
   const confirmDialogFooter = (
     <div>
       <Button
@@ -176,6 +189,7 @@ export default function ConsultaLancamento() {
               lancamentos={lancamentos}
               deletarAction={abrirConfirmacao}
               editarAction={editar}
+              alterarStatus={alterarStatus}
             ></LancamentosTable>
           </div>
         </div>

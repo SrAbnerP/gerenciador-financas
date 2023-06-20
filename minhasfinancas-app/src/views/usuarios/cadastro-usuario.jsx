@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import UsuarioService from "../../app/service/usuarioService";
 import { mensagemErro, mensagemSucesso } from "../../components/Toastr";
+import LancamentoService from "../../app/service/lancamentoService";
 
 export default function CadastroUsuario(props) {
   const [nome, setNome] = useState("");
@@ -17,43 +18,21 @@ export default function CadastroUsuario(props) {
 
   const [usuarioService] = useState(() => new UsuarioService());
 
-  function validar() {
-    const msgs = [];
-
-    if (!nome) {
-      msgs.push("O campo Nome é obrigatório.");
-    }
-
-    if (!email) {
-      msgs.push("O campo Email é obrigatório.");
-    } else if (!email.match(/^[a-z0=9.]+@[a-z0-9]+\.[a-z]/)) {
-      msgs.push("Informe um Email válido.");
-    }
-
-    if (!senha || !confirmarSenha) {
-      msgs.push("Digite as senha e a confirme");
-    } else if (senha !== confirmarSenha) {
-      msgs.push("As senhas não batem.");
-    }
-
-    return msgs;
-  }
-
   const cadastrar = () => {
-    const msgs = validar();
-
-    if (msgs && msgs.length > 0) {
-      msgs.forEach((msg, index) => {
-        mensagemErro(msg);
-      });
-      return false;
-    }
-
     const usuario = {
       nome: nome,
       email: email,
       senha: senha,
+      confirmarSenha: confirmarSenha,
     };
+
+    try {
+      usuarioService.validar(usuario);
+    } catch (erro) {
+      const mensagens = erro.mensagens;
+      mensagens.forEach((msg) => mensagemErro(msg));
+      return false;
+    }
 
     usuarioService
       .salvar(usuario)

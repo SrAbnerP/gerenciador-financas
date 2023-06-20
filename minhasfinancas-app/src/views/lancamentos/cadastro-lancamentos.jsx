@@ -66,6 +66,14 @@ export default function CadastroLancamentos() {
       usuario: usuarioLogado.id,
     };
 
+    try {
+      lancamentoService.validar(lancamento);
+    } catch (erro) {
+      const mensagens = erro.mensagens;
+      mensagens.forEach((msg) => mensagemErro(msg));
+      return false;
+    }
+
     lancamentoService
       .salvar(lancamento)
       .then((response) => {

@@ -1,7 +1,12 @@
 import React from "react";
 import Link from "./Link";
+import AuthService from "../app/service/authService";
 
 export default function NavBar(props) {
+  const deslogar = () => {
+    AuthService.removerUsuarioAutenticado();
+  };
+
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div className="container">
@@ -24,7 +29,7 @@ export default function NavBar(props) {
             <Link href="#/home" label="Home" />
             <Link href="#/cadastro-usuarios" label="Usuários" />
             <Link href="#/consulta-lancamentos" label="Lançamentos" />
-            <Link href="#/login" label="Login" />
+            <Link onClick={deslogar} href="#/login" label="Sair" />
           </ul>
         </div>
       </div>

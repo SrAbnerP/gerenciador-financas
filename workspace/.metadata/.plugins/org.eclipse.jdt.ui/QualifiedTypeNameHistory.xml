@@ -24,7 +24,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.service.UsuarioService"/>
     <fullyQualifiedTypeName name="jakarta.websocket.server.PathParam"/>
-    <fullyQualifiedTypeName name="com.abner.minhasfinancas.api.dto.LancamentoDTO"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
@@ -35,14 +34,10 @@
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.api.dto.AtualizaStatusDTO"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.model.enums.StatusLancamento"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.exception.RegraNegocioException"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.service.LancamentoService"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
-    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="java.lang.Double"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
     <fullyQualifiedTypeName name="java.math.BigDecimal"/>
@@ -60,4 +55,9 @@
     <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="com.abner.minhasfinancas.model.entity.Lancamento"/>
+    <fullyQualifiedTypeName name="com.abner.minhasfinancas.api.dto.LancamentoDTO"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 </qualifiedTypeNameHistroy>

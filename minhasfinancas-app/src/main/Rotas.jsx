@@ -20,7 +20,7 @@ export default function Rotas(props) {
             element={<ConsultaLancamento />}
           />
           <Route
-            path="/cadastro-lancamentos"
+            path="/cadastro-lancamentos/:id?"
             element={<CadastroLancamentos />}
           />
         </Routes>

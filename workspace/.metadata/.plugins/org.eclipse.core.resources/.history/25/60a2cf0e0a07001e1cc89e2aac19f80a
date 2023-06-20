@@ -1,6 +1,0 @@
-package com.abner.minhasfinancas.service;
-
-public interface LancamentoService {
-
-	Lancamento
-}

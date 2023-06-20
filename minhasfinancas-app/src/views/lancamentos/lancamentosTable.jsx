@@ -20,7 +20,7 @@ export default function LancamentosTable(props) {
             type="button"
             className="btn btn-primary"
             onClick={(e) => {
-              props.editarAction(lancamento);
+              props.editarAction(lancamento.id);
             }}
           >
             Editar

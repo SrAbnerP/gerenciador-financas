@@ -13,6 +13,8 @@ import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 
 export default function ConsultaLancamento() {
+  const [lancamentoService] = useState(() => new LancamentosService());
+
   const [ano, setAno] = useState("");
   const [mes, setMes] = useState("");
   const [tipo, setTipo] = useState("");
@@ -22,7 +24,9 @@ export default function ConsultaLancamento() {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [lancamentoDeletar, setLancamentoDeletar] = useState({});
 
-  const [lancamentoService] = useState(() => new LancamentosService());
+  const meses = lancamentoService.obterListaMeses();
+
+  const tipos = lancamentoService.obterListaTipos();
 
   const navigate = useNavigate();
 
@@ -72,9 +76,9 @@ export default function ConsultaLancamento() {
       });
   };
 
-  const meses = lancamentoService.obterListaMeses();
-
-  const tipos = lancamentoService.obterListaTipos();
+  const editar = (id) => {
+    navigate(`/cadastro-lancamentos/${id}`);
+  };
 
   const cancelarDelecao = () => {
     setShowConfirmDialog(false);
@@ -171,6 +175,7 @@ export default function ConsultaLancamento() {
             <LancamentosTable
               lancamentos={lancamentos}
               deletarAction={abrirConfirmacao}
+              editarAction={editar}
             ></LancamentosTable>
           </div>
         </div>

@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import UsuarioService from "../../app/service/usuarioService";
 import LocalStorageService from "../../app/service/localStorageService";
+import AuthContext from "../../app/context/authContext";
 
 import Card from "../../components/Card";
 import Form from "../../components/Form";
 import { mensagemErro } from "../../components/Toastr";
 
 export default function Login() {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   //const [mensagemErro, setMensagemErro] = useState(null);
@@ -24,7 +26,8 @@ export default function Login() {
         senha: senha,
       })
       .then((response) => {
-        LocalStorageService.adicionarItem("_usuario_logado", response.data);
+        //LocalStorageService.adicionarItem("_usuario_logado", response.data);
+        login(response.data);
         navigate("/home");
       })
       .catch((erro) => {

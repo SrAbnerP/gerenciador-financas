@@ -1,4 +1,4 @@
-import ApiService from "../apiservice";
+import ApiService from "../service/apiservice";
 import ErroValidacao from "../exception/ErroValidacao";
 
 class UsuarioService extends ApiService {

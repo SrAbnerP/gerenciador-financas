@@ -1,5 +1,5 @@
 import React from "react";
-import Rotas from "./Rotas";
+import Rotas from "../routes/Rotas";
 import NavBar from "../components/NavBar";
 
 import "toastr/build/toastr.min.js";

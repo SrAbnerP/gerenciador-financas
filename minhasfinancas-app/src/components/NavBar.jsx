@@ -1,11 +1,10 @@
-import React from "react";
-import Link from "./Link";
+import React, { useContext } from "react";
+import Link from "../components/Link";
 import AuthService from "../app/service/authService";
+import AuthContext from "../app/context/authContext";
 
 export default function NavBar(props) {
-  const deslogar = () => {
-    AuthService.removerUsuarioAutenticado();
-  };
+  const { isAutenticado, logout } = useContext(AuthContext);
 
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
@@ -26,10 +25,19 @@ export default function NavBar(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav">
-            <Link href="#/home" label="Home" />
-            <Link href="#/cadastro-usuarios" label="Usuários" />
-            <Link href="#/consulta-lancamentos" label="Lançamentos" />
-            <Link onClick={deslogar} href="#/login" label="Sair" />
+            {isAutenticado ? (
+              <>
+                <Link href="#/home" label="Home" />
+                <Link href="#/consulta-lancamentos" label="Lançamentos" />
+                {/* <Link href="#/cadastro-usuarios" label="Cadastrar" /> */}
+                <Link onClick={logout} href="#/login" label="Sair" />
+              </>
+            ) : (
+              <>
+                <Link href="#/cadastro-usuarios" label="Cadastrar" />
+                <Link href="#/login" label="Login" />
+              </>
+            )}
           </ul>
         </div>
       </div>

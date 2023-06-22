@@ -1,0 +1,77 @@
+package com.abner.minhasfinancas.service.impl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.abner.minhasfinancas.exception.ErroAutenticacao;
+import com.abner.minhasfinancas.exception.RegraNegocioException;
+import com.abner.minhasfinancas.model.entity.Usuario;
+import com.abner.minhasfinancas.model.repository.UsuarioRepository;
+import com.abner.minhasfinancas.service.UsuarioService;
+
+@Service
+public class UsuarioServiceImpl implements UsuarioService {
+
+	@Autowired
+	private UsuarioRepository repository;
+	private BCryptPasswordEncoder encoder;
+
+	public UsuarioServiceImpl(UsuarioRepository repository, BCryptPasswordEncoder encoder) {
+		super();
+		this.repository = repository;
+		this.encoder = encoder;
+	}
+
+	@Override
+	public Usuario autenticar(String email, String senha) {
+
+		Optional<Usuario> usuario = repository.findByEmail(email);
+
+		if (!usuario.isPresent()) {
+			throw new ErroAutenticacao("Usuário não encontrado para o email informado.");
+		}
+
+		if (!usuario.get().getSenha().equals(senha)) {
+			throw new ErroAutenticacao("Senha inválida.");
+		}
+		return usuario.get();
+	}
+
+	@Override
+	@Transactional
+	public Usuario salvarUsuario(Usuario usuario) {
+
+		validarEmail(usuario.getEmail());
+		criptografarSenha(usuario);
+		return repository.save(usuario);
+	}
+
+	// Utilizado para criptografar a senha
+	private void criptografarSenha(Usuario usuario) {
+		// Pega a senha
+		String senha = usuario.getSenha();
+		// Criptograda a senha
+		String senhaCripto = encoder.encode(senha);
+		// Salva a senha criptografada para o usuario
+		usuario.setSenha(senhaCripto);
+	}
+
+	@Override
+	public void validarEmail(String email) {
+
+		boolean existe = repository.existsByEmail(email);
+		if (existe) {
+			throw new RegraNegocioException("Já existe um usuário cadastrado com este email.");
+		}
+	}
+
+	@Override
+	public Optional<Usuario> obterPorId(Long id) {
+		return repository.findById(id);
+	}
+
+}

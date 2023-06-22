@@ -3,6 +3,7 @@ package com.abner.minhasfinancas.service.impl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +18,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private UsuarioRepository repository;
+	private PasswordEncoder encoder;
 
-	public UsuarioServiceImpl(UsuarioRepository repository) {
+	public UsuarioServiceImpl(UsuarioRepository repository, PasswordEncoder encoder) {
 		super();
 		this.repository = repository;
+		this.encoder = encoder;
 	}
 
 	@Override
@@ -32,7 +35,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new ErroAutenticacao("Usuário não encontrado para o email informado.");
 		}
 
-		if (!usuario.get().getSenha().equals(senha)) {
+		// Pega a senha digitada no login e compara com a senha cripografada
+		boolean senhasBatem = encoder.matches(senha, usuario.get().getSenha());
+
+		if (!senhasBatem) {
 			throw new ErroAutenticacao("Senha inválida.");
 		}
 		return usuario.get();
@@ -43,7 +49,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario salvarUsuario(Usuario usuario) {
 
 		validarEmail(usuario.getEmail());
+		criptografarSenha(usuario);
 		return repository.save(usuario);
+	}
+
+	// Utilizado para criptografar a senha
+	private void criptografarSenha(Usuario usuario) {
+		// Pega a senha
+		String senha = usuario.getSenha();
+		// Criptograda a senha
+		String senhaCripto = encoder.encode(senha);
+		// Salva a senha criptografada para o usuario
+		usuario.setSenha(senhaCripto);
 	}
 
 	@Override

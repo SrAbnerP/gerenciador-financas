@@ -9,9 +9,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.abner.minhasfinancas.api.filter.JwtTokenFilter;
+import com.abner.minhasfinancas.service.JwtService;
 import com.abner.minhasfinancas.service.impl.SecurityUserDetailsService;
 
 @Configuration
@@ -21,6 +23,14 @@ public class SecurityConfiguration {
 
 	@Autowired
 	private SecurityUserDetailsService userDetailsService;
+
+	@Autowired
+	private JwtService jwtService;
+
+	@Bean
+	public JwtTokenFilter jwtTokenFilter() {
+		return new JwtTokenFilter(jwtService, userDetailsService);
+	}
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -41,6 +51,7 @@ public class SecurityConfiguration {
 			authorizeConfig.requestMatchers("/api/usuarios").permitAll();
 			authorizeConfig.anyRequest().authenticated();
 		});
+		http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}

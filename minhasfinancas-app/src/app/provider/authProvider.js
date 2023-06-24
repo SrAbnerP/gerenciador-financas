@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AuthContext from "../context/authContext";
 import AuthService from "../service/authService";
 import ApiService from "../service/apiservice";
+import jwt from "jsonwebtoken";
 
 const AuthProvider = ({ children }) => {
   const [isAutenticado, setIsAutenticado] = useState(
@@ -10,6 +11,7 @@ const AuthProvider = ({ children }) => {
 
   const login = (tokenDTO) => {
     const token = tokenDTO.token;
+    const claims = jwt.decode(token);
     ApiService.registrarToken(token);
     AuthService.logar(tokenDTO);
     setIsAutenticado(true);

@@ -1,7 +1,6 @@
 package com.abner.minhasfinancas.config;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -66,12 +65,11 @@ public class SecurityConfiguration {
 
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		List<String> all = Arrays.asList("*");
 
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedMethods(all);
-		config.setAllowedOrigins(all);
-		config.setAllowedHeaders(all);
+		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+		config.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000"));
+		config.setAllowedHeaders(Arrays.asList("*"));
 		config.setAllowCredentials(true);
 
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

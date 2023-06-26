@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "../views/usuarios/login";
 import CadastroUsuario from "../views/usuarios/cadastro-usuario";
@@ -21,7 +21,7 @@ export default function Rotas(props) {
 
   return (
     <div>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/login" element={<Login />} />
@@ -40,7 +40,7 @@ export default function Rotas(props) {
             element={<PrivateRoute element={<CadastroLancamentos />} />}
           />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }

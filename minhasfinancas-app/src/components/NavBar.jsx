@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Link from "../components/Link";
-import AuthService from "../app/service/authService";
 import AuthContext from "../app/context/authContext";
 
 export default function NavBar(props) {
@@ -9,7 +8,7 @@ export default function NavBar(props) {
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div className="container">
-        <a href="#/home" className="navbar-brand">
+        <a href="/home" className="navbar-brand">
           Minhas Finanças
         </a>
         <button
@@ -27,15 +26,15 @@ export default function NavBar(props) {
           <ul className="navbar-nav">
             {isAutenticado ? (
               <>
-                <Link href="#/home" label="Home" />
-                <Link href="#/consulta-lancamentos" label="Lançamentos" />
+                <Link href="/home" label="Home" />
+                <Link href="/consulta-lancamentos" label="Lançamentos" />
                 {/* <Link href="#/cadastro-usuarios" label="Cadastrar" /> */}
-                <Link onClick={logout} href="#/login" label="Sair" />
+                <Link onClick={logout} href="/login" label="Sair" />
               </>
             ) : (
               <>
-                <Link href="#/cadastro-usuarios" label="Cadastrar" />
-                <Link href="#/login" label="Login" />
+                <Link href="/cadastro-usuarios" label="Cadastrar" />
+                <Link href="/login" label="Login" />
               </>
             )}
           </ul>

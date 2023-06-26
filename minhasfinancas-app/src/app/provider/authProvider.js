@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AuthContext from "../context/authContext";
 import AuthService from "../service/authService";
-import ApiService from "../service/apiservice";
 import jwt from "jsonwebtoken";
 
 const AuthProvider = ({ children }) => {

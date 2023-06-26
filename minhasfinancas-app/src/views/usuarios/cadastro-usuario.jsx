@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import UsuarioService from "../../app/service/usuarioService";
 import { mensagemErro, mensagemSucesso } from "../../components/Toastr";
-import LancamentoService from "../../app/service/lancamentoService";
 
 export default function CadastroUsuario(props) {
   const [nome, setNome] = useState("");

@@ -34,7 +34,7 @@ export default function Home(props) {
       <p className="lead">
         <a
           className="btn btn-primary btn-lg"
-          href="#/cadastro-usuarios"
+          href="/cadastro-usuarios"
           role="button"
         >
           <i className="pi pi-users" style={{ fontSize: "1rem" }}></i> Cadastrar
@@ -42,7 +42,7 @@ export default function Home(props) {
         </a>
         <a
           className="btn btn-danger btn-lg"
-          href="#/cadastro-lancamentos"
+          href="/cadastro-lancamentos"
           role="button"
         >
           <i className="pi pi-money-bill" style={{ fontSize: "1rem" }}></i>{" "}

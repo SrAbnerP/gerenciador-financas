@@ -11,7 +11,6 @@ import LocalStorageService from "../../app/service/localStorageService";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function CadastroLancamentos() {
-  //const { id } = useParams();
   const params = useParams();
   const cod = params.id;
 

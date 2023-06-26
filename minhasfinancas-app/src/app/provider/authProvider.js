@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthContext from "../context/authContext";
 import AuthService from "../service/authService";
 import ApiService from "../service/apiservice";
@@ -12,10 +12,21 @@ const AuthProvider = ({ children }) => {
   const login = (tokenDTO) => {
     const token = tokenDTO.token;
     const claims = jwt.decode(token);
-    ApiService.registrarToken(token);
-    AuthService.logar(tokenDTO);
+    const usuario = {
+      id: claims.userId,
+      nome: claims.nome,
+    };
+    AuthService.logar(usuario, token);
     setIsAutenticado(true);
   };
+
+  useEffect(() => {
+    const isUserAuthenticated = AuthService.isUsuarioAutenticado();
+    if (isUserAuthenticated) {
+      const usuario = AuthService.refreshSession();
+      setIsAutenticado(true);
+    }
+  }, []);
 
   const logout = () => {
     AuthService.removerUsuarioAutenticado();

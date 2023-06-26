@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,11 +43,12 @@ public class SecurityConfiguration {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-		return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(userDetailsService)
-				.passwordEncoder(passwordEncoder()).and().build();
-	}
+	/*
+	 * @Bean public AuthenticationManager authenticationManager(HttpSecurity http)
+	 * throws Exception { return
+	 * http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(
+	 * userDetailsService) .passwordEncoder(passwordEncoder()).and().build(); }
+	 */
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -59,6 +59,8 @@ public class SecurityConfiguration {
 			authorizeConfig.anyRequest().authenticated();
 		});
 		http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(userDetailsService)
+				.passwordEncoder(passwordEncoder());
 
 		return http.build();
 	}

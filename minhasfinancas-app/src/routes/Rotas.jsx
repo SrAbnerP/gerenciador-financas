@@ -6,6 +6,7 @@ import CadastroUsuario from "../views/usuarios/cadastro-usuario";
 import Home from "../views/home";
 import ConsultaLancamento from "../views/lancamentos/consulta-lancamentos";
 import CadastroLancamentos from "../views/lancamentos/cadastro-lancamentos";
+import LandingPage from "../views/landingPage";
 
 import AuthService from "../app/service/authService";
 
@@ -22,8 +23,13 @@ export default function Rotas(props) {
     <div>
       <HashRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro-usuarios" element={<CadastroUsuario />} />
+          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route
+            exact
+            path="/cadastro-usuarios"
+            element={<CadastroUsuario />}
+          />
           <Route path="/home" element={<PrivateRoute element={<Home />} />} />
           <Route
             path="/consulta-lancamentos"

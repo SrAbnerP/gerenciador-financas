@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import UsuarioService from "../../app/service/usuarioService";
-import LocalStorageService from "../../app/service/localStorageService";
 import AuthContext from "../../app/context/authContext";
 
 import Card from "../../components/Card";
@@ -13,7 +12,6 @@ export default function Login() {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  //const [mensagemErro, setMensagemErro] = useState(null);
 
   const [usuarioService] = useState(() => new UsuarioService());
 
@@ -26,7 +24,6 @@ export default function Login() {
         senha: senha,
       })
       .then((response) => {
-        //LocalStorageService.adicionarItem("_usuario_logado", response.data);
         login(response.data);
         navigate("/home");
       })
@@ -41,7 +38,7 @@ export default function Login() {
 
   return (
     <div className="row">
-      <div className="col-md-6" style={{ position: "relative", left: "300px" }}>
+      <div className="col-md-6 offset-md-3">
         <div className="bs-docs-section">
           <Card title="Login">
             <div className="row">

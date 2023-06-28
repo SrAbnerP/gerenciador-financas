@@ -1,5 +1,0 @@
-package com.abner.minhasfinancas.config;
-
-public class SecurityConfiguration {
-
-}

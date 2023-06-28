@@ -26,14 +26,14 @@ export default function NavBar(props) {
           <ul className="navbar-nav">
             {isAutenticado ? (
               <>
-                <Link href="/home" label="Home" />
                 <Link href="/consulta-lancamentos" label="Lançamentos" />
+                <Link href="/cadastro-lancamentos" label="Cadastrar" />
                 {/* <Link href="#/cadastro-usuarios" label="Cadastrar" /> */}
                 <Link onClick={logout} href="/login" label="Sair" />
               </>
             ) : (
               <>
-                <Link href="/cadastro-usuarios" label="Cadastrar" />
+                <Link href="/cadastro-usuarios" label="Cadastre-se" />
                 <Link href="/login" label="Login" />
               </>
             )}

@@ -1,6 +1,9 @@
 import ApiService from "../service/apiservice";
 import ErroValidacao from "../exception/ErroValidacao";
 
+import madeira1 from "../../images/madeira1.jpg";
+import madeira2 from "../../images/madeira2.jpg";
+
 class UsuarioService extends ApiService {
   constructor() {
     super("/api/usuarios");
@@ -40,6 +43,23 @@ class UsuarioService extends ApiService {
     if (erros && erros.length > 0) {
       throw new ErroValidacao(erros);
     }
+  }
+
+  obterListaImagens() {
+    return [
+      {
+        id: 1,
+        titulo: "Não sabe para onde vai seu dinheiro?",
+        descricao: "Cadastre-se já e administre-o!",
+        imagem: madeira1,
+      },
+      {
+        id: 2,
+        titulo: "Não consegue poupar nada?",
+        descricao: "Nós te ajudamos a poupar, faça ele trabalhar por você!",
+        imagem: madeira2,
+      },
+    ];
   }
 }
 
